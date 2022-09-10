@@ -2,7 +2,7 @@
 
 /**
   * main - entry point of the code
-  *
+  * Description: using ASCII property
   * Return: success (0)
   */
 
