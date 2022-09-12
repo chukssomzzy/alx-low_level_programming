@@ -18,7 +18,7 @@ int main(void)
 	{
 		for (tempIndexJ = 48; tempIndexJ < end_count; tempIndexJ++)
 		{
-			if (tempIndexI == tempIndexJ)
+			if (tempIndexI == tempIndexJ || tempIndexI > tempIndexJ)
 				tempState = 0;
 			if (tempState)
 			{
