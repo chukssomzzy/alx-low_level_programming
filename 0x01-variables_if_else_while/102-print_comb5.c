@@ -25,6 +25,8 @@ int main(void)
 			{
 				for (l = 48; l < end_count; l++)
 				{
+					if (i + j < k + l)
+					{
 					if (i > end_count - 9)
 						putchar(' ');
 					putchar(i);
@@ -32,8 +34,9 @@ int main(void)
 					putchar(' ');
 					putchar(k);
 					putchar(l);
-					if (!(k >= end_count - 1 && l >= end_count - 1 && i >= end_count - 1))
+					if (!(i == 57 && j == 56 && k == 57 && l == 57))
 						putchar(',');
+					}
 				}
 			}
 		}
