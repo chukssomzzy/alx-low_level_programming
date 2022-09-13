@@ -27,15 +27,17 @@ int main(void)
 				{
 					if ((i * 10) + j < (k * 10) + l)
 					{
-					if (i > end_count - 9)
-						putchar(' ');
 					putchar(i);
 					putchar(j);
 					putchar(' ');
 					putchar(k);
 					putchar(l);
 					if (!(i == 57 && j == 56 && k == 57 && l == 57))
+					{
 						putchar(',');
+						putchar(' ');
+					}
+
 					}
 				}
 			}
