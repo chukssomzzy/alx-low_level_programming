@@ -25,7 +25,7 @@ int main(void)
 			{
 				for (l = 48; l < end_count; l++)
 				{
-					if (i + j < k + l)
+					if ((i * 10) + j < (k * 10) + l)
 					{
 					if (i > end_count - 9)
 						putchar(' ');
