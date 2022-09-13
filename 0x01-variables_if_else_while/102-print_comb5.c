@@ -25,15 +25,16 @@ int main(void)
 			{
 				for (l = j + 1; l < end_count; l++)
 				{
-					if (i > end_count - 9)
-						putchar(' ');
 					putchar(i);
 					putchar(j);
 					putchar(' ');
 					putchar(k);
 					putchar(l);
 					if (!(i == 57 && j == 56 && k == 57 && l == 57))
+					{
 						putchar(',');
+						putchar(' ');
+					}
 				}
 			}
 		}
