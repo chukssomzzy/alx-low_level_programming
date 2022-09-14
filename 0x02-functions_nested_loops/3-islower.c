@@ -2,7 +2,7 @@
 #define islower 97
 /**
  * _islower - returns a int for true and false state
- *
+ * @c: an interger to hold the decimal value of the character``
  * Return: 1 is true and 0 is false
  */
 
