@@ -2,8 +2,8 @@
 
 /**
  * add - add two params
- * @n1 parmas 1
- * @n2 param 2
+ * @n1: parmas 1
+ * @n2: param 2
  * Description: no side effect
  * Return: sum of the two params
  */
