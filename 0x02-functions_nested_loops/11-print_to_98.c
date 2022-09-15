@@ -33,7 +33,7 @@ void print_to_98(int n)
 		{
 			state = 0;
 			last = tmp_i % 10;
-			if (i > 9)
+			if (i > 9 && i >= 0)
 				_putchar(first + '0');
 			_putchar(last + '0');
 		}
