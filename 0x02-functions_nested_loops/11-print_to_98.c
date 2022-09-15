@@ -23,7 +23,7 @@ void print_to_98(int n)
 		{
 			state = 1;
 			tmp = first / 10;
-			second = first / 10;
+			second = first % 10;
 			first = tmp;
 			last = tmp_i % 10;
 			_putchar(first + '0');
