@@ -1,5 +1,5 @@
 # include "main.h"
-# include <stdio.h>
+# include <stdlib.h>
 /**
  * print_to_98 - print natural numbers from n
  * @n: holds starting point
@@ -12,12 +12,9 @@ void print_to_98(int n)
 	i = n;
 	compare = 98;
 	do {
-		tmp_i = i;
-		if (tmp_i < 0)
-		{
-			tmp_i *= -1;
+		tmp_i = abs(i);
+		if (i < 0)
 			_putchar('-');
-		}
 		first = tmp_i / 10;
 		if (first > 9)
 		{
@@ -33,7 +30,7 @@ void print_to_98(int n)
 		{
 			state = 0;
 			last = tmp_i % 10;
-			if (i > 9 && i >= 0)
+			if (i > 9 || (i <= 0 && tmp_i > 9))
 				_putchar(first + '0');
 			_putchar(last + '0');
 		}
