@@ -1,4 +1,9 @@
-#include "main.h"
+# more on function and nested loops
+
+## _isupper
+
+```c
+ #include "main.h"
 
 /**
  * _isupper - checks if input ia an uppercase letter in ASCII
@@ -9,3 +14,4 @@ int _isupper(int c)
 {
 	return (c >= 65 && c <= 90);
 }
+```
