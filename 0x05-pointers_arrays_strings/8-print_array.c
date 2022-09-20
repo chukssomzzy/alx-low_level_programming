@@ -12,7 +12,7 @@ void print_array(int *a, int n)
 	int tmp[100], i, current;
 	int j = 0;
 
-	for (i = 0; *(a + i) != '\0' && i <= n; i++)
+	for (i = 0; i < n && *(a + i) != '\0'; i++)
 	{
 		if (i != 0)
 			_putchar(' ');
@@ -24,7 +24,7 @@ void print_array(int *a, int n)
 		} while (current /= BASE);
 		while (--j >= 0)
 			_putchar(*(tmp + j) + '0');
-		if (*(a + i + 1) != '\0')
+		if (i < n - 1)
 			_putchar(',');
 		j = 0;
 	}
