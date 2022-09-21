@@ -5,7 +5,7 @@
  * @c: holds variable for the character to print
  */
 
-void _putchar(int c)
+void _putchar(char c)
 {
 	putchar(c);
 }
