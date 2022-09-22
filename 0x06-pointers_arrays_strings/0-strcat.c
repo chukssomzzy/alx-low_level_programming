@@ -1,15 +1,15 @@
 # include "main.h"
 
 /**
- * strcat - add two string
- * @s1: first string
- * @s2: second string
+ * _strcat - add two string
+ * @dest: first string
+ * @src: second string
  * Return: a pointer to s1 + s2
  */
 
 char *_strcat(char *dest, char *src)
 {
-	int i,j;
+	int i, j;
 
 	for (i = 0; *(dest + i) != '\0'; i++)
 		;
