@@ -6,18 +6,18 @@
  * Return: address
  */
 
+
 char *string_toupper(char *s)
 {
-	int diff;
+	int i = 0;
 
-	diff = 'a' - 'A';
-	while (*s != '\0')
+	while (*(s + i) != '\0')
 	{
-		if (*s >= 'a' && *s <= 'z')
-			*(s) -= diff;
-		s++;
+		if ((*(s + i) >= 97) && (*(s + i) <= 122))
+			*(s + i) = *(s + i) - 32;
+		i++;
 	}
-	return (s);
 
+	return (s);
 }
 

@@ -13,6 +13,6 @@ int main(void)
 
 	ptr = string_toupper(str);
 	printf("%s\n", ptr);
-	printf("%s\n", str);
+	/*printf("%s\n", str);*/
 	return (0);
 }
