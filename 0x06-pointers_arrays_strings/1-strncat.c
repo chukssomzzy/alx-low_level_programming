@@ -1,11 +1,11 @@
 # include "main.h"
 
 /**
- * strncat - cat n byte of s2
- * Description: since alguments contains byte number, string does not have to explicitly include null terminator
- * @s1: destination pointer
- * @s2: src pointer
+ * _strncat - cat n byte of s2
+ * @dest: destination pointer
+ * @src: src pointer
  * @n: No of bytes
+ * Return: buffer address
  */
 
 char *_strncat(char *dest, char *src, int n)
