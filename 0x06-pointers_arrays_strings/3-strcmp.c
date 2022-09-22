@@ -18,16 +18,16 @@ int _strcmp(char *s1, char *s2)
 	state = 1;
 	while ((s1[i] != '\0' && s2[i] != '\0'))
 	{
-		if((s1[i] != s2[i]) && state)
+		if ((s1[i] != s2[i]) && state)
 		{
-			n = 1;
+			n = 15;
 			state = 0;
 		}
 		i++;
 	}
 
 	if (*(s1 + i) != '\0')
-		n = 1;
+		n = 15;
 	else if (*(s2 + i) != '\0')
 		n *= -1;
 	return (n);
