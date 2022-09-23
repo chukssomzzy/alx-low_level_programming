@@ -9,17 +9,29 @@
 
 char *cap_string(char *s)
 {
-	int i, state, diff;
+	int i, j, state, diff;
+	char sep[13] = {'\t', '\n', ' ', ';', '.', '{','}','?','"','(',')','!'};
 
 	state = OUT_OF_CHAR;
 	diff = 'a' - 'A';
 	for (i = 0; (*(s + i)) != '\0'; i++)
+	{
 		if (state)
 		{
 			if (*(s + i) >= 'a' && *(s + i) <= 'z')
 				*(s + i) = *(s + i) - diff;
 			state = OUT_OF_CHAR;
-		} else if (*(s + i) == '\n' || *(s + i) == '\t' || *(s + i) == ' ')
-			state = ON_CHAR;
+		}
+		j = 0;
+		while (*(sep + j) != '\0')
+		{
+		   if (*(s + i) == *(sep + j++))
+		   {
+				state = ON_CHAR;
+				break;
+		   }
+
+		}
+	}
 	return (s);
 }
