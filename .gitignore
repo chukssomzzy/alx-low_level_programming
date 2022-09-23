@@ -1,3 +1,5 @@
 
 .ccls-cache
 *.swp
+main.c 
+a.out
