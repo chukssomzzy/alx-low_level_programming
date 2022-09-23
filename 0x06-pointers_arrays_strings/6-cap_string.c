@@ -10,7 +10,7 @@
 char *cap_string(char *s)
 {
 	int i, j, state, diff;
-	char sep[13] = {'\t', '\n', ' ', ';', '.', '{','}','?','"','(',')','!'};
+	char sep[13] = {'\t', '\n', ' ', ';', '.', '{', '}', '?', '"', '(', ')', '!'};
 
 	state = OUT_OF_CHAR;
 	diff = 'a' - 'A';
@@ -25,11 +25,11 @@ char *cap_string(char *s)
 		j = 0;
 		while (*(sep + j) != '\0')
 		{
-		   if (*(s + i) == *(sep + j++))
-		   {
+			if (*(s + i) == *(sep + j++))
+			{
 				state = ON_CHAR;
 				break;
-		   }
+			}
 
 		}
 	}
