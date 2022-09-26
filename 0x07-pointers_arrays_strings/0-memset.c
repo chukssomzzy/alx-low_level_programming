@@ -5,6 +5,7 @@
  * @s: pointer to a string
  * @b: a dynamic variable of a char
  * @n: an unsigned int holding value of size of value to fill up
+ * Return: deference buffer
  */
 
 char *_memset(char *s, char b, unsigned int n)
