@@ -47,10 +47,23 @@ a little bit of math
 ```c
 int factorial(int n)
 {
+	if (n < 0)
+		return (-1);
 	if (n == 0)
 		return (1);
-	return n * factorial(n - 1);
+	return (n * factorial((n - 1)));
 }
 ```
+## let raise the power to y with recursion
+
+moremath
+```c
+int _pow_recursion(int x, int y)
+{
+	if (y == 0)
+		return (1);
+	return x * _pow_recursion(x, (y - 1));
+		 
+}
 
 
