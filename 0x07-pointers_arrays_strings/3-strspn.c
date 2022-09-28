@@ -1,17 +1,28 @@
 #include "main.h"
+
 /**
- * _memcpy - copies memory area,
- * @dest: destination memory area.
- * @src: source memory area.
- * @n: bytes filled.
- * Return: the pointer to dest.
+ * _strspn - returns number of b occurs in a
+ * @s: pointer to string
+ * @accept: pointer to accept string
+ * Return: number of byte
  */
-char *_memcpy(char *dest, char *src, unsigned int n)
+
+unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int i;
+	unsigned int n, j;
 
-	for (i = 0; i < n; i++)
-		*(dest + i) =  *(src + i);
-
-	return (dest);
+	n = 0;
+	while (*s)
+	{
+		for (j = 0; *(accept + j); j++)
+			if (*(accept + j) == *s)
+			{
+				n++;
+				break;
+			}
+			else if (*(accept + j + 1) == '\0')
+				return (n);
+		s++;
+	}
+	return (n);
 }
