@@ -1,17 +1,18 @@
 #include "main.h"
+# define NULL 0
 /**
- * _memcpy - copies memory area,
- * @dest: destination memory area.
- * @src: source memory area.
- * @n: bytes filled.
- * Return: the pointer to dest.
+ * _strchr - find a char
+ * @s: pointer to address where string
+ * @c: char to find
+ * Return: on find return address
  */
-char *_memcpy(char *dest, char *src, unsigned int n)
+
+char *_strchr(char *s, char c)
 {
-	unsigned int i;
 
-	for (i = 0; i < n; i++)
-		*(dest + i) =  *(src + i);
-
-	return (dest);
+	while (*(s++) != c)
+		;
+	if (*(--s) == c)
+		return (s);
+	return (NULL);
 }
