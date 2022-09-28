@@ -4,6 +4,7 @@
  * _pow_recursion - raise x to y
  * @x: base of operation
  * @y: superscript of operation
+ * Return: signed int
  */
 
 int _pow_recursion(int x, int y)
