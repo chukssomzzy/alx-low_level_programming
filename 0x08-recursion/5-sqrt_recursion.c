@@ -5,15 +5,17 @@
 
 /**
  * test - check primity
+ * @n: number to check
+ * @g: guess prime
  * Return: prime number
  */
 
 int test(int n, int g)
 {
 	if (abs((n / g) - g) < 0.001)
-		return g;
+		return (g);
 	else
-		return test(n, (g + n / g) / 2);
+		return (test(n, (g + n / g) / 2));
 }
 
 
