@@ -34,8 +34,10 @@ int _sqrt_recursion(int n)
 {
 	int t;
 
+    if (n < 0)
+		return (-1);
 	t = test(n, 1);
-	if(t * t != n)
+	if (t * t != n)
 		return (-1);
 	return (t);
 }
