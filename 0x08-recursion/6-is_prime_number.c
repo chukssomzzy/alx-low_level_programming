@@ -13,7 +13,7 @@ int is_prime_number(int n)
 {
 	int i = 5;
 
-	return check_is_prime_number(n, i);
+	return (check_is_prime_number(n, i));
 }
 
 /**
@@ -33,5 +33,5 @@ int check_is_prime_number(int n, int x)
 		return (FALSE);
 	if (x * x > n)
 		return (TRUE);
-	return check_is_prime_number(n, (x + 6));
+	return (check_is_prime_number(n, (x + 6)));
 }
