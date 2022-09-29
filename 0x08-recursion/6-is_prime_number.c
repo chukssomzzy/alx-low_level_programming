@@ -2,25 +2,36 @@
 # define TRUE 1
 # define FALSE 0
 
+int check_is_prime_number(int, int);
 /**
- * is_prime_number
+ * is_prime_number - test prime
  * @n: n to test
  * Return: true or FALSE
  */
-int i = 5;
 
 int is_prime_number(int n)
 {
-	extern int i;
+	int i = 5;
 
+	return check_is_prime_number(n, i);
+}
+
+/**
+ * check_is_prime_number - test prime
+ * @n: n to test
+ * @x: interate recursive on x
+ * Return: 1 as true and 0 as FALSE
+ */
+
+int check_is_prime_number(int n, int x)
+{
 	if (n == 2 || n == 3)
 		return (TRUE);
 	if (n <= 1 || n % 2 == 0 || n % 3 == 0)
 		return (FALSE);
-	if (n % i == 0 || n % (i + 2) == 0)
-		return FALSE;
-	if (i * i > n)
-		return TRUE;
-	i += 6;
-	return is_prime_number(n);
+	if (!(n % x) || !(n % (x + 2)))
+		return (FALSE);
+	if (x * x > n)
+		return (TRUE);
+	return check_is_prime_number(n, (x + 6));
 }
