@@ -6,7 +6,7 @@ int _strlen(char *s);
 /**
  * is_palindrome - test if is_palindrome
  * @s: pointer to string
- * Returns: binary
+ * Return: binary
  */
 
 int is_palindrome(char *s)
@@ -21,6 +21,7 @@ int is_palindrome(char *s)
  * @s: pointer to string
  * @i: iterating counter
  * @l: length of string
+ * Return: binary
  */
 
 int _strcmp(char *s, int i, int l)
@@ -43,6 +44,7 @@ int _strcmp(char *s, int i, int l)
 int _strlen(char *s)
 {
 	int n = 1;
+
 	if (*s == '\0')
 		return (0);
 	return (n + _strlen(s + 1));
