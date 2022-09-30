@@ -5,7 +5,7 @@
 int is_al(char *s);
 /**
  * main - add numbers
- * @arvc: size of argv
+ * @argc: size of argv
  * @argv: contains all cmd line args
  * Return: binary
  */
@@ -33,8 +33,8 @@ int main(int argc, char **argv)
 
 
 /**
- * is_al: checks if a string contains an alphabet
- * @c: pointer to string
+ * is_al - checks if a string contains an alphabet
+ * @s: pointer to string
  * Return: binary
  */
 
