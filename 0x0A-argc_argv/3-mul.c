@@ -3,6 +3,13 @@
 # include <stdlib.h>
 
 
+/**
+ * main - multiply two numbers
+ * @argc: number of arg in args vector
+ * @argv: holds args
+ * Return: binary
+ */
+
 int main(int argc, char **argv)
 {
 	if (argc != 3)

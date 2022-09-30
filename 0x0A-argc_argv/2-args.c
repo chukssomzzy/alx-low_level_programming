@@ -2,6 +2,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+/**
+ * main - prints args in argv
+ * @argc: len of argv
+ * @argv: array containing string
+ * Return: binary
+ */
 
 int main(int argc, char **argv)
 {
