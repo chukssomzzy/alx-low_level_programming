@@ -2,7 +2,7 @@
 # include <stdlib.h>
 
 /**
- * create_arrayddress range perms: large range  - create an array of char
+ * create_array  - create an array of char
  * @size: size of array
  * @c: ascii decimal value of char
  * Return: pointer or NULl
@@ -15,7 +15,7 @@ char *create_array(unsigned int size, char c)
 
 	s = malloc(sizeof(*s) * size);
 	i = 0;
-	if (size == 0)
+	if (s == NULL)
 		return (NULL);
 	while (size-- > 0)
 		*(s + i++) = c;
