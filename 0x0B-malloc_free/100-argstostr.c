@@ -31,7 +31,7 @@ char *argstostr(int ac, char **av)
 		free(s);
 		return (NULL);
 	}
-	i = 1;
+	i = 0;
 	pos = 0;
 	while (i < ac)
 	{
