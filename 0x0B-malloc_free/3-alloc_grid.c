@@ -9,7 +9,7 @@
  * Return: a pointer to the array
  */
 
-int **alloc_grid(int h, int w)
+int **alloc_grid(int w, int h)
 {
 	int **a, i, j;
 
