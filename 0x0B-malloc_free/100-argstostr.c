@@ -4,9 +4,9 @@
 int _strlen(char *s);
 int _strposcat(int i, char *p, char *s);
 /**
- * argtostr - add string together and delimit with newline
- * ac - length of av
- * av - contains string argtostr
+ * argstostr - add string together and delimit with newline
+ * @ac - length of av
+ * @av - contains string argtostr
  * Return: pointer to new string
  */
 
@@ -39,7 +39,7 @@ char *argstostr(int ac, char **av)
 
 		i++;
 	}
-    *(s + ++pos) = '\0';
+	*(s + ++pos) = '\0';
 	return (s);
 }
 
