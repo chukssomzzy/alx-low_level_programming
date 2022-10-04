@@ -14,9 +14,9 @@ char *str_concat(char *s1, char *s2)
 	int i, j, k;
 	char *s;
 
-	if(!s1)
+	if (!s1)
 		s1 = "";
-	if(!s2)
+	if (!s2)
 		s2 = "";
 	i = _strsize(s1);
 	j = _strsize(s2);
