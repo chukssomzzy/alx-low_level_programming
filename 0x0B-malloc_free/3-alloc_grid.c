@@ -25,15 +25,17 @@ int **alloc_grid(int h, int w)
 	while (i < h)
 	{
 		a[i] = malloc(sizeof(int) * w);
-		if (!*(a + i))
+		if (!a[i])
 		{
+			while (i >= 0)
+				free(a[i--]);
 			free(a);
 			return (NULL);
 		}
 		i++;
 	}
 	for (i = 0; i < h; i++)
-		for(j = 0; j < w; j++)
+		for (j = 0; j < w; j++)
 			a[i][j] = 0;
 	return (a);
 }
