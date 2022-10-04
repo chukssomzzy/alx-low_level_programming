@@ -22,7 +22,7 @@ int **alloc_grid(int h, int w)
 		return (NULL);
 	}
 	i = 0;
-	while (i < w)
+	while (i < h)
 	{
 		a[i] = malloc(sizeof(int) * w);
 		if (!*(a + i))
@@ -34,6 +34,6 @@ int **alloc_grid(int h, int w)
 	}
 	for (i = 0; i < h; i++)
 		for(j = 0; j < w; j++)
-			a[j][i] = 0;
+			a[i][j] = 0;
 	return (a);
 }
