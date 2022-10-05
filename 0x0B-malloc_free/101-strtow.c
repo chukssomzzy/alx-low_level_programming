@@ -43,7 +43,8 @@ int count_w(char *s)
 {
 	int i, c, state;
 
-	i = c = state = 0;
+	i = c = 0;
+	state = INWORD;
 	while (*(s + i) != '\0')
 	{
 		if (*(s + i) == ' ')
