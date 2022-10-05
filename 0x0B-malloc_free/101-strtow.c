@@ -20,7 +20,7 @@ char **strtow(char *str)
 	if (!str)
 		return  (NULL);
 	len = count_w(str);
-	if(!len)
+	if (!len)
 		return (NULL);
 	s = malloc(sizeof(char *) * len);
 	if (!s)
