@@ -22,12 +22,13 @@ char **strtow(char *str)
 	len = count_w(str);
 	if (!len)
 		return (NULL);
-	s = malloc(sizeof(char *) * len);
+	s = malloc(sizeof(char *) * (len + 1));
 	if (!s)
 		return (NULL);
 	if (str_alloc(str, len, s, 1))
 		return (NULL);
 	str_fill(str, s, len);
+	*(s + len) = NULL;
 	return (s);
 }
 
@@ -48,8 +49,11 @@ int count_w(char *s)
 	{
 		if (*(s + i) == ' ')
 			state = INWORD;
-		else if (state && ++c)
-			state = OUTWORD;
+		else if (state)
+		{
+        c++;
+		state = OUTWORD;
+		}
 		i++;
 	}
 	return (c);
@@ -87,7 +91,7 @@ int str_alloc(char *s, int len, char **p, int t)
 					}
 				j++;
 			}
-			*(p + i) =  malloc(sizeof(char) * (c + 1));
+			*(p + i) =  malloc(sizeof(char) * c);
 			if (!*(p + i))
 			{
 				str_alloc(NULL, len, p, 0);
