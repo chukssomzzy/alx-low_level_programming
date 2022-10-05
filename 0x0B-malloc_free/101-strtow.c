@@ -51,8 +51,8 @@ int count_w(char *s)
 			state = INWORD;
 		else if (state)
 		{
-        c++;
-		state = OUTWORD;
+			c++;
+			state = OUTWORD;
 		}
 		i++;
 	}
@@ -91,7 +91,7 @@ int str_alloc(char *s, int len, char **p, int t)
 					}
 				j++;
 			}
-			*(p + i) =  malloc(sizeof(char) * c);
+			*(p + i) =  malloc(sizeof(char) * (c + 1));
 			if (!*(p + i))
 			{
 				str_alloc(NULL, len, p, 0);
