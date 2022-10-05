@@ -22,7 +22,7 @@ char **strtow(char *str)
 	len = count_w(str);
 	if(!len)
 		return (NULL);
-	s = malloc(sizeof(char *) * (len + 1));
+	s = malloc(sizeof(char *) * len);
 	if (!s)
 		return (NULL);
 	if (str_alloc(str, len, s, 1))
