@@ -5,8 +5,8 @@
 
 int count_w(char *s);
 int str_alloc(char *s, int len, char **p, int t);
-void str_fill(char *s, char **p,int len);
-/**:
+void str_fill(char *s, char **p, int len);
+/**
  * strtow - converts string to an array of words
  * @str: str array
  * Return: a 2d array
@@ -16,9 +16,12 @@ char **strtow(char *str)
 {
 	int len;
 	char **s;
+
 	if (!str)
 		return  (NULL);
 	len = count_w(str);
+	if(!len)
+		return (NULL);
 	s = malloc(sizeof(char *) * (len + 1));
 	if (!s)
 		return (NULL);
@@ -58,6 +61,7 @@ int count_w(char *s)
  * @len: length of array
  * @p: pointer to array
  * @t: allocate or free
+ * Return: binary
  */
 
 int str_alloc(char *s, int len, char **p, int t)
