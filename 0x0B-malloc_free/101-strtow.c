@@ -116,7 +116,8 @@ void str_fill(char *s, char **p, int len)
 {
 	int i, j, k, state, pos;
 
-	state = j = pos = k = 0;
+	pos = k = 0;
+	state = INWORD;
 	for (i = 0; i < len; i++)
 	{
 		j = pos;
