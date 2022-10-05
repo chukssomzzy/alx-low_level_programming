@@ -28,7 +28,6 @@ char **strtow(char *str)
 	if (str_alloc(str, len, s, 1))
 		return (NULL);
 	str_fill(str, s, len);
-	*(s + len) = NULL;
 	return (s);
 }
 
