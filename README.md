@@ -20,7 +20,7 @@
 
 ## Books
 c programming by K & Richie  
-![C programming by K & R](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDZok8kwTSaZ825upAVAuh212NKn_aHhlzJw&usqp=CAU)
+![https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/The_C_Programming_Language_logo.svg/1200px-The_C_Programming_Language_logo.svg.png)
 
 ## Todos
 - [ ] not added yet ✌️
