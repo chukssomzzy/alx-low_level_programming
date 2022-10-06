@@ -18,6 +18,10 @@
 7. **Recursion** - 🕶️
 8. **Static_libraries*
 
+## Books
+c programming by K & Richie  
+![C programming by K & R](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDZok8kwTSaZ825upAVAuh212NKn_aHhlzJw&usqp=CAU)
+
 ## Todos
 - [ ] not added yet ✌️
 
