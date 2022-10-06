@@ -3,7 +3,7 @@
  </p>
 <p align="center">
 <a href="https://www.alxafrica.com/">
-Alx Low Level Programming
+<h1>Alx Low Level Programming</h1>
 </a>
 </p>
 
