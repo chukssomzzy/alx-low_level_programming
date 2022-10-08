@@ -22,13 +22,15 @@ int main(int argc, char **argv)
 	long int num1, num2, num_t;
 	char *err = "Error\n";
 
-	if (argc > 3)
+	if (argc != 3)
 	{
 		print_string(err);
 		exit(98);
 	}
-	num1 = _atoi(*(argv + 1)) + 1;
-	num2 = _atoi(*(argv + 2)) + 1;
+	num1 = _atoi(*(argv + 1)) - 1;
+	num2 = _atoi(*(argv + 2)) - 1;
+	if (!num1 || !num2)
+		exit(98);
 	num_t = num1 * num2;
 	if (print_number(num_t))
 	{
@@ -52,12 +54,13 @@ long _atoi(char *s)
 
 	i = 0;
 	cnt = 0;
-	while (*(s + i) == '\0')
+	while (*(s + i) != '\0')
 	{
 		if (*(s + i) >= '0' && *(s + i) <= '9')
 			cnt = BASE * cnt + (*(s + i) - '0');
 		else
 			exit(EXIT_FAILURE);
+		i++;
 	}
 	return (cnt + 1);
 }
@@ -77,17 +80,17 @@ int print_number(long int num)
 	tmp = num;
 	while (num /= BASE)
 		len++;
-	num_arr = malloc(sizeof(char) * (len + 1));
+	num_arr = malloc(sizeof(int) * (len + 1));
 	if (!num_arr)
 		exit(EXIT_FAILURE);
 	tmp_len = len;
 	do {
-		*(num_arr + --len) = tmp % BASE;
+		*(num_arr + --len) = '0' + (tmp % BASE);
 	} while (tmp /= BASE);
-	*(num_arr + tmp_len) = '\0';
 	i = 0;
-	while (*(num_arr + i) != '\0')
+	while (i < tmp_len)
 		_putchar(*(num_arr + i++));
+	_putchar('\n');
 	free(num_arr);
 	exit(EXIT_SUCCESS);
 }
