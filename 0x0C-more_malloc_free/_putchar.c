@@ -2,6 +2,7 @@
 /**
  * _putchar - prints a character to stdoutput
  * @c: holds variable for the character to print
+ * Return: binary
  */
 
 int _putchar(char c)
