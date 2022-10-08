@@ -29,8 +29,11 @@ int main(int argc, char **argv)
 	}
 	num1 = _atoi(*(argv + 1)) - 1;
 	num2 = _atoi(*(argv + 2)) - 1;
-	if (!num1 || !num2)
+	if (!(num1 + 1) || !(num2 + 1))
+	{
+		print_string(err);
 		exit(98);
+	}
 	num_t = num1 * num2;
 	if (print_number(num_t))
 	{
@@ -59,7 +62,7 @@ long _atoi(char *s)
 		if (*(s + i) >= '0' && *(s + i) <= '9')
 			cnt = BASE * cnt + (*(s + i) - '0');
 		else
-			exit(EXIT_FAILURE);
+			return (0);
 		i++;
 	}
 	return (cnt + 1);
@@ -74,25 +77,26 @@ long _atoi(char *s)
 int print_number(long int num)
 {
 	long int len, tmp, tmp_len, i;
-	int *num_arr;
+	char *num_arr;
 
 	len = 1;
 	tmp = num;
 	while (num /= BASE)
 		len++;
-	num_arr = malloc(sizeof(int) * (len + 1));
+	num_arr = malloc(sizeof(char) * (len + 1));
 	if (!num_arr)
-		exit(EXIT_FAILURE);
+		return (1);
 	tmp_len = len;
 	do {
 		*(num_arr + --len) = '0' + (tmp % BASE);
 	} while (tmp /= BASE);
+	*(num_arr + tmp_len) = '\0';
 	i = 0;
 	while (i < tmp_len)
 		_putchar(*(num_arr + i++));
 	_putchar('\n');
 	free(num_arr);
-	exit(EXIT_SUCCESS);
+	return (0);
 }
 
 /**
@@ -106,6 +110,5 @@ void print_string(char *s)
 
 	while (*(s + i) != '\0')
 		_putchar(*(s + i++));
-	exit(EXIT_SUCCESS);
 }
 
