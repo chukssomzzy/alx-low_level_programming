@@ -6,17 +6,18 @@
  * @array: pointer to array address
  * @size: size of array
  * @cmp: compare function
- *
- * Return: indexof element found or -1
+ * Return: index of cmp(int)
  */
 
 int int_index(int *array, int size, int (*cmp)(int))
 {
-	unsigned int i;
+	int i;
 
+	if (size <= 0)
+		return (-1);
 	i = 0;
-	while (i < (unsigned int) size)
+	while (i <  size)
 		if (cmp(*(array + i++)))
-			return (i - 1);
+			return (i);
 	return (-1);
 }
