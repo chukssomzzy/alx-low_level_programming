@@ -13,8 +13,7 @@
 int main(int argc, char **argv)
 {
 	char *op_codes = (char *) main;
-	int i;
-	int num;
+	int i, num;
 
 	if (argc != 2)
 	{
@@ -31,7 +30,8 @@ int main(int argc, char **argv)
 	while (i < num)
 	{
 		printf("%02x", *(op_codes + i) & 0xff);
-		printf(" ");
+		if (i != (num - 1))
+			printf(" ");
 		i++;
 	}
 	putchar('\n');
