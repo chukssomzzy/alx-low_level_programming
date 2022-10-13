@@ -20,14 +20,14 @@ void print_numbers(const char *seperator, const unsigned int n, ...)
 	unsigned int i;
 
 	i = 0;
-	if (seperator)
+	if (seperator && n)
 	{
 		va_start(ap, n);
 		while (i++ < n)
 		{
 			printf("%i", va_arg(ap, int));
 			if (i < n)
-				printf("%s ", seperator);
+				printf("%s", seperator);
 			else
 				printf("\n");
 		}
