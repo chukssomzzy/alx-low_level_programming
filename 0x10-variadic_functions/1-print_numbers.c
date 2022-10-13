@@ -28,9 +28,8 @@ void print_numbers(const char *seperator, const unsigned int n, ...)
 			printf("%i", va_arg(ap, int));
 			if (i < n)
 				printf("%s", seperator);
-			else
-				printf("\n");
 		}
 		va_end(ap);
 	}
+	printf("\n");
 }
