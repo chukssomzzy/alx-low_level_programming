@@ -1,7 +1,6 @@
 # include "3-calc.h"
 # include <stdlib.h>
 # include <stdio.h>
-# include <string.h>
 
 /**
  * main - add, subtract, divide, multiple and modulus
