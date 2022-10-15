@@ -20,6 +20,7 @@ void print_all(const char * const format, ...)
 	va_list ap;
 	int i, j;
 	int fmt_size;
+	char *sep = "";
 	fmt_t fun_fmts[] = {
 		{'c', print_char},
 		{'f', print_float},
@@ -35,9 +36,9 @@ void print_all(const char * const format, ...)
 		while (j < fmt_size)
 			if ((*(format + i) == ((fun_fmts + j++)->fmt)))
 			{
+				printf("%s", sep);
 				(*(fun_fmts + j - 1)->print_format)(ap);
-				if (*(format + i + 1) != '\0')
-					printf(", ");
+				sep = ", ";
 				break;
 			}
 		i++;
