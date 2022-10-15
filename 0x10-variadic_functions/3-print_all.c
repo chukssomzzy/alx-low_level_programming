@@ -28,15 +28,20 @@ void print_all(const char * const format, ...)
 	};
 	fmt_size = 4;
 	va_start(ap, format);
-	for (i = 0; format && *(format + i); i++)
-		for (j = 0; j < fmt_size; j++)
-			if ((*(format + i) == ((fun_fmts + j)->fmt)))
+	i = 0;
+	while (format && *(format + i))
+	{
+		j = 0;
+		while (j < fmt_size)
+			if ((*(format + i) == ((fun_fmts + j++)->fmt)))
 			{
-				(*(fun_fmts + j)->print_format)(ap);
+				(*(fun_fmts + j - 1)->print_format)(ap);
 				if (*(format + i + 1) != '\0')
 					printf(", ");
 				break;
 			}
+		i++;
+	}
 	printf("\n");
 	va_end(ap);
 }
