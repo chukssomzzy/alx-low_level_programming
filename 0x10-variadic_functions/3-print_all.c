@@ -91,8 +91,6 @@ void print_int(va_list aps)
 	int i;
 
 	i = va_arg(aps, int);
-
-	if (i)
 		printf("%i", i);
 }
 
@@ -108,9 +106,11 @@ void print_string(va_list ap)
 	char *s = va_arg(ap, char *);
 
 	if (s)
+	{
 		printf("%s", s);
-	else
-		printf("(nil)");
+		return;
+	}
+	printf("(nil)");
 }
 
 
