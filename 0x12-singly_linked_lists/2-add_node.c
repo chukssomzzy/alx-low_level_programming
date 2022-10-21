@@ -1,5 +1,4 @@
 # include "lists.h"
-# include <stdlib.h>
 
 /**
  * add_node - append element to a node
@@ -13,13 +12,11 @@ list_t *add_node(list_t **head, char *str)
 {
 	list_t *new;
 
-	if (!(*head))
-		return (NULL);
 	new = malloc(sizeof(list_t));
 	if (!new)
 		return (NULL);
 	new->len = _strlen(str);
-	new->str = str;
+	new->str = strdup(str);
 	new->next = *head;
 	*head = new;
 	return (*head);
