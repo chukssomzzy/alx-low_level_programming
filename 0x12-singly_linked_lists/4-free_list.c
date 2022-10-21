@@ -9,8 +9,13 @@ void free_list(list_t *head)
 {
 	list_t *tmp;
 
-	if (!head->next)
+	if (!head)
 		return;
+	if (!head->next)
+	{
+		free(head);
+		return;
+	}
 	tmp = head->next;
 	free(head);
 	free_list(tmp);
