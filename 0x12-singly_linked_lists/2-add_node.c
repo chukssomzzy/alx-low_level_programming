@@ -1,5 +1,5 @@
 # include "lists.h"
-
+int _strlen(char *);
 /**
  * add_node - append element to a node
  * @head: list parent
