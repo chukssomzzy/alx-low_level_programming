@@ -1,6 +1,8 @@
 # ifndef _LIST_H_
 # define _LIST_H_
-
+# ifndef NULL
+# define NULL ((void *)0)
+# endif
 # include <stdlib.h>
 /**
  * struct list_s - singly linked list
@@ -19,5 +21,8 @@ typedef struct list_s
 size_t print_list(const list_t *h);
 int _putchar(char);
 size_t list_len(const list_t *h);
+int _strlen(char *s);
+list_t *add_node(list_t **, char *);
+
 # endif
 
