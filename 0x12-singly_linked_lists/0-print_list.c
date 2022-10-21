@@ -12,6 +12,8 @@
 
 size_t print_list(const list_t *h)
 {
+	if (!h)
+		return (0);
 	if (h->str)
 		printf("[%d] %s\n", h->len, h->str);
 	else
@@ -20,3 +22,4 @@ size_t print_list(const list_t *h)
 		return (1);
 	return (1 + print_list(h->next));
 }
+
