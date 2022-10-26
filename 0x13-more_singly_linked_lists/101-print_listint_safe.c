@@ -17,10 +17,7 @@ size_t print_listint_safe(const listint_t *head)
 	{
 		new = malloc(sizeof(listp_t));
 		if (!new)
-		{
-			free_listp(&hptr);
 			exit(98);
-		}
 		new->p = (void *) head;
 		new->nxtptr = hptr;
 		hptr = new;
