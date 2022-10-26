@@ -19,17 +19,13 @@ size_t free_listint_safe(listint_t **h)
 	{
 		new = malloc(sizeof(listp_t));
 		if (!new)
-		{
-			*h = hd;
-			free_listpd(&hptr);
-			return (n);
-		}
+			exit(98);
 		new->p = (void *)(*h);
 		new->nxtptr = hptr;
 		hptr = new;
 		tmp = hptr;
 		while ((tmp = tmp->nxtptr))
-			if (tmp == (void *)*h)
+			if (tmp->p == *h)
 			{
 				*h = NULL;
 					free_listpd(&hptr);
