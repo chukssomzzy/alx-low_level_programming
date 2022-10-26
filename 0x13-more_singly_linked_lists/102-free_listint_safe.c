@@ -20,6 +20,7 @@ size_t free_listint_safe(listint_t **h)
 		new = malloc(sizeof(listp_t));
 		if (!new)
 		{
+			*h = hd;
 			free_listpd(&hptr);
 			return (n);
 		}
@@ -30,7 +31,8 @@ size_t free_listint_safe(listint_t **h)
 		while ((tmp = tmp->nxtptr))
 			if (tmp == (void *)*h)
 			{
-				free_listpd(&hptr);
+				*h = NULL;
+					free_listpd(&hptr);
 				return (n);
 			}
 		tmp_h = hd->next;
@@ -38,6 +40,7 @@ size_t free_listint_safe(listint_t **h)
 		hd = tmp_h;
 		n++;
 	}
+	*h = NULL;
 	free_listpd(&hptr);
 	return (n);
 }
