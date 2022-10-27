@@ -1,0 +1,10 @@
+# ifndef _MAIN_H_
+# define _MAIN_H_
+# ifndef NULL
+# define NULL ((void *) 0)
+# endif
+# define BASE2 2
+
+unsigned int binary_to_uint(const char *b);
+int _putchar(char c);
+# endif
