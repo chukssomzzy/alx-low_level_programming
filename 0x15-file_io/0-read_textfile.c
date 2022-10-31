@@ -21,7 +21,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	if (cnt == -1)
 		return (0);
 	wrcnt = write(STDIN_FILENO, buf, cnt);
-	if (cnt == -1 && wrcnt != cnt)
+	if (wrcnt == -1 || wrcnt != cnt)
 		return (0);
 	return (wrcnt);
 }
