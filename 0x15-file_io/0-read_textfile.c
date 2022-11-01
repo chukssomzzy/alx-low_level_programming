@@ -1,11 +1,11 @@
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
+# include "main.h"
+
 
 /**
  * read_textfile - read a textfile and print to stdout
  * @filename: filename or location of file
  * @letters: Count to print
+ *
  * Return: the number of file printed or 0 on error
  */
 
