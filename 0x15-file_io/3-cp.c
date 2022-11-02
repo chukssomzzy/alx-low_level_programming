@@ -1,4 +1,5 @@
 # include "main.h"
+# include <stdio.h>
 # define MAXRD 1024
 void rd_from_and_write(const ssize_t ffd, const ssize_t tfd, char *buf,
 		char *f, char *t);
@@ -29,7 +30,7 @@ int  main(int ac, char **av)
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", *(av + 1));
 		exit(98);
 	}
-	tfd = open(*(av + 2), O_WRONLY | O_TRUNC | O_APPEND | O_CREAT);
+	tfd = open(*(av + 2), O_WRONLY | O_TRUNC | O_APPEND | O_CREAT, 00664);
 	if (tfd == -1)
 	{
 		ffd = close(ffd);
