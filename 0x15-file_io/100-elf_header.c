@@ -1,11 +1,7 @@
 # include "main.h"
-# include <asm-generic/fcntl.h>
 # include <elf.h>
-# include <fcntl.h>
 # include <linux/elf.h>
-# include <stdio.h>
 # include <sys/types.h>
-# include <unistd.h>
 
 static void p_magic(unsigned char *s);
 static void is_elf(unsigned char *);
