@@ -4,6 +4,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <elf.h>
 
 int append_text_to_file(const char *filename, char *text_content);
 int _putchar(char c);
