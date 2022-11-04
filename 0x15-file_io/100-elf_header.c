@@ -1,8 +1,9 @@
-# include "main.h"
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
 # include <elf.h>
-# include <linux/elf.h>
 # include <sys/types.h>
-#include <unistd.h>
 
 static void p_magic(unsigned char *s);
 static void is_elf(unsigned char *);
