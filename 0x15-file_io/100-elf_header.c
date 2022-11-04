@@ -1,3 +1,4 @@
+#include <linux/elf.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -11,8 +12,8 @@ void p_class(unsigned char *s);
 void p_data(unsigned char *s);
 void p_ver(u_int32_t);
 void p_os(unsigned char *);
-void p_type(uint16_t t);
-void p_addr(Elf64_Addr);
+void p_type(uint16_t t, unsigned char *);
+void p_addr(Elf64_Addr, unsigned char *);
 void close_h(ssize_t fd);
 /**
  * main - display elf infomation contain in a file
@@ -57,8 +58,8 @@ int main(int ac, char **av)
 	p_data(elfheader->e_ident + 6);
 	p_ver(elfheader->e_version);
 	p_os(elfheader->e_ident + 8);
-	p_type(elfheader->e_type);
-	p_addr(elfheader->e_entry);
+	p_type(elfheader->e_type, elfheader->e_ident);
+	p_addr(elfheader->e_entry, elfheader->e_ident);
 	close_h(hfd);
 	free(elfheader);
 	exit(0);
@@ -133,7 +134,7 @@ void p_data(unsigned char *s)
 			printf("2's complement, big endian\n");
 			break;
 		default:
-			printf("unknown data format\n");
+			printf("<unknown: %x>\n", *s);
 			break;
 	}
 }
@@ -149,7 +150,7 @@ void p_ver(uint32_t v)
 	if (v == EV_CURRENT)
 		printf("%u (current)\n", v);
 	else
-		printf("%u (unknown)\n", v);
+		printf("\n");
 }
 
 /**
@@ -163,28 +164,28 @@ void p_os(unsigned char *s)
 	switch (*s)
 	{
 		case ELFOSABI_LINUX:
-			printf("Linux ABI\n");
+			printf("UNIX - Linux\n");
 			break;
 		case ELFOSABI_SYSV:
 			printf("UNIX - System V\n");
 			break;
 		case ELFOSABI_HPUX:
-			printf("HP-UX ABI\n");
+			printf("UNIX - HP-UX\n");
 			break;
 		case ELFOSABI_NETBSD:
 			printf("NetBSD ABI\n");
 			break;
 		case ELFOSABI_SOLARIS:
-			printf("Solaris ABI\n");
+			printf("UNIX - Solaris\n");
 			break;
 		case ELFOSABI_TRU64:
-			printf("TRU64 UNIX ABI\n");
+			printf("UNIX - TRU64\n");
 			break;
 		case ELFOSABI_ARM_AEABI:
-			printf("ARM architecture ABI\n");
+			printf("ARM\n");
 			break;
 		default:
-			printf("unknown ABI\n");
+			printf("<unknown: %x>\n", *s);
 			break;
 	}
 	printf("  ABI Version:                       %u\n", *(s + 1));
@@ -195,8 +196,10 @@ void p_os(unsigned char *s)
  * @t: p_type
  */
 
-void p_type(uint16_t t)
+void p_type(uint16_t t, unsigned char *s)
 {
+	if (s[EI_DATA] == ELFDATA2MSB)
+		t >>= 8;
 	printf("  Type:                              ");
 	switch (t)
 	{
@@ -212,8 +215,11 @@ void p_type(uint16_t t)
 		case ET_DYN:
 			printf("DYN (Shared object file)\n");
 			break;
+		case ET_NONE:
+			printf("NONE (None)\n");
+			break;
 		default:
-			printf("NONE (Unknown file)\n");
+			printf("<unknown %x>\n",t);
 			break;
 	}
 }
@@ -223,9 +229,18 @@ void p_type(uint16_t t)
  * @addr: address
  */
 
-void p_addr(Elf64_Addr addr)
+void p_addr(Elf64_Addr addr, unsigned char *s)
 {
-	printf("  Entry point address:               %#llx\n", addr);
+	printf("  Entry point address:               ");
+	if (s[EI_DATA] == ELFDATA2MSB)
+	{
+		addr = ((addr << 8) & 0xff00ff00) | ((addr >> 8) & 0xff00ff);
+		addr = (addr << 16) | (addr >> 16);
+	}
+	if (s[EI_CLASS] == ELFCLASS32)
+		printf("%#llx\n", addr);
+	else
+	 printf("%#llx\n", addr);
 }
 
 /**
