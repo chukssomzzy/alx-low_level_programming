@@ -2,6 +2,7 @@
 # include <elf.h>
 # include <linux/elf.h>
 # include <sys/types.h>
+#include <unistd.h>
 
 static void p_magic(unsigned char *s);
 static void is_elf(unsigned char *);
@@ -11,6 +12,7 @@ void p_ver(u_int32_t);
 void p_os(unsigned char *);
 void p_type(uint16_t t);
 void p_addr(Elf64_Addr);
+void close_h(ssize_t fd);
 /**
  * main - display elf infomation contain in a file
  * @ac: size of array av
@@ -21,7 +23,7 @@ void p_addr(Elf64_Addr);
 int main(int ac, char **av)
 {
 	Elf64_Ehdr *elfheader = malloc(sizeof(Elf64_Ehdr));
-	ssize_t hfd;
+	ssize_t hfd, rd;
 
 	if (ac != 2)
 	{
@@ -36,12 +38,15 @@ int main(int ac, char **av)
 	hfd = open(*(av + 1), O_RDONLY);
 	if (hfd == -1)
 	{
+		free(elfheader);
 		dprintf(STDERR_FILENO, "Error: Unable to open file %s\n", *(av + 1));
 		exit(98);
 	}
-	hfd = read(hfd, elfheader, sizeof(Elf64_Ehdr));
-	if (hfd == -1)
+	rd = read(hfd, elfheader, sizeof(Elf64_Ehdr));
+	if (rd == -1)
 	{
+		close_h(hfd);
+		free(elfheader);
 		dprintf(STDERR_FILENO, "Error: Unable to read from fildes %lu", hfd);
 		exit(98);
 	}
@@ -53,6 +58,8 @@ int main(int ac, char **av)
 	p_os(elfheader->e_ident + 8);
 	p_type(elfheader->e_type);
 	p_addr(elfheader->e_entry);
+	close_h(hfd);
+	free(elfheader);
 	exit(0);
 }
 
@@ -220,3 +227,18 @@ void p_addr(Elf64_Addr addr)
 	printf("  Entry point address:               %#llx\n", addr);
 }
 
+/**
+ * close_h - closes a file description
+ * @fd: file des to close
+ */
+
+void close_h(ssize_t fd)
+{
+	int cfd = close(fd);
+
+	if (cfd == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: fildes refuse to close %i\n", cfd);
+		exit(98);
+	}
+}
