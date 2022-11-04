@@ -104,6 +104,9 @@ void p_class(unsigned char *s)
 {
 	switch (s[EI_CLASS])
 	{
+		case ELFCLASSNONE:
+			printf("none\n");
+			break;
 		case ELFCLASS32:
 			printf("  Class:                             ELF32\n");
 			break;
@@ -131,6 +134,9 @@ void p_data(unsigned char *s)
 			break;
 		case ELFDATA2MSB:
 			printf("2's complement, big endian\n");
+			break;
+		case ELFDATANONE:
+			printf("none\n");
 			break;
 		default:
 			printf("<unknown: %x>\n", *s);
@@ -162,6 +168,15 @@ void p_os(unsigned char *s)
 	printf("  OS/ABI:                            ");
 	switch (*s)
 	{
+		case ELFOSABI_FREEBSD:
+			printf("UNIX - FreeBSD\n");
+			break;
+		case ELFOSABI_IRIX:
+			printf("UNIX - IRIX\n");
+			break;
+		case ELFOSABI_MODESTO:
+			printf("UNIX - MODESTO\n");
+			break;
 		case ELFOSABI_LINUX:
 			printf("UNIX - Linux\n");
 			break;
@@ -188,7 +203,6 @@ void p_os(unsigned char *s)
 			break;
 		default:
 			printf("<unknown: %x>\n", *s);
-			break;
 	}
 	printf("  ABI Version:                       %u\n", *(s + 1));
 }
@@ -240,7 +254,7 @@ void p_addr(Elf64_Addr addr, unsigned char *s)
 		addr = (addr << 16) | (addr >> 16);
 	}
 	if (s[EI_CLASS] == ELFCLASS32)
-		printf("%#lx\n", addr);
+		printf("%#x\n", (unsigned int)addr);
 	else
 		printf("%#lx\n", addr);
 }
