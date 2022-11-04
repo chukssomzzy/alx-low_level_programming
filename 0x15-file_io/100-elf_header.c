@@ -1,4 +1,3 @@
-#include <linux/elf.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -184,6 +183,9 @@ void p_os(unsigned char *s)
 		case ELFOSABI_ARM:
 			printf("ARM\n");
 			break;
+		case ELFOSABI_STANDALONE:
+			printf("Standalone App\n");
+			break;
 		default:
 			printf("<unknown: %x>\n", *s);
 			break;
@@ -240,7 +242,7 @@ void p_addr(Elf64_Addr addr, unsigned char *s)
 	if (s[EI_CLASS] == ELFCLASS32)
 		printf("%#llx\n", addr);
 	else
-	 printf("%#llx\n", addr);
+		printf("%#llx\n", addr);
 }
 
 /**
