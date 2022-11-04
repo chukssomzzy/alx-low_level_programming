@@ -240,9 +240,9 @@ void p_addr(Elf64_Addr addr, unsigned char *s)
 		addr = (addr << 16) | (addr >> 16);
 	}
 	if (s[EI_CLASS] == ELFCLASS32)
-		printf("%#llx\n", addr);
+		printf("%#lx\n", addr);
 	else
-		printf("%#llx\n", addr);
+		printf("%#lx\n", addr);
 }
 
 /**
