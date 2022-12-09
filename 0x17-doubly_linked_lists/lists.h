@@ -1,5 +1,5 @@
-# ifndef _MAIN_H
-# define _MAIN_H
+# ifndef MAIN_H_
+# define MAIN_H_
 # include <stddef.h>
 /**
  * struct dlistint_s - doubly linked list
@@ -10,11 +10,10 @@
  * Description: doubly linked list node structure
  *
  */
-typedef struct dlistint_s
-{
-	int n;
-	struct dlistint_s *prev;
-	struct dlistint_s *next;
+typedef struct dlistint_s {
+  int n;
+  struct dlistint_s *prev;
+  struct dlistint_s *next;
 } dlistint_t;
 
 size_t dlistint_len(const dlistint_t *h);
