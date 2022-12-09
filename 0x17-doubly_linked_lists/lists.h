@@ -1,5 +1,6 @@
 # ifndef _MAIN_H
 # define _MAIN_H
+# include <stddef.h>
 /**
  * struct dlistint_s - doubly linked list
  * @n: integer
@@ -9,7 +10,6 @@
  * Description: doubly linked list node structure
  *
  */
-# include <stddef.h>
 typedef struct dlistint_s
 {
 	int n;
