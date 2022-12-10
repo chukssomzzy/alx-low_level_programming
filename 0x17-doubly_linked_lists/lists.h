@@ -1,6 +1,9 @@
 # ifndef MAIN_H_
 # define MAIN_H_
 # include <stddef.h>
+# include <stdlib.h>
+
+
 /**
  * struct dlistint_s - doubly linked list
  * @n: integer
@@ -11,9 +14,9 @@
  *
  */
 typedef struct dlistint_s {
-  int n;
-  struct dlistint_s *prev;
-  struct dlistint_s *next;
+	int n;
+	struct dlistint_s *prev;
+	struct dlistint_s *next;
 } dlistint_t;
 
 size_t dlistint_len(const dlistint_t *h);
