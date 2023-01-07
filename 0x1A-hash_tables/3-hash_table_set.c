@@ -32,6 +32,8 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	hash_index = key_index((unsigned char *) key, ht->size);
 	if (!(*(ht->array + hash_index)))
 		*(ht->array + hash_index) = bucket;
+	else if (strcmp(*(ht->array + hash_index)->key, key) == 0)
+		*(ht->array + hash_index) = bucket;
 	else
 		add_to_bucket((ht->array + hash_index), bucket);
 	return (1);
