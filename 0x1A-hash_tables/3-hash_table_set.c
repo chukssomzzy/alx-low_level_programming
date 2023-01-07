@@ -36,6 +36,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		*(ht->array + hash_index) = bucket;
 	else
 		add_to_bucket((ht->array + hash_index), bucket);
+	ht->count++;
 	return (1);
 }
 
