@@ -1,6 +1,6 @@
 # include "hash_tables.h"
-#include <stdlib.h>
-#include <string.h>
+# include <stdlib.h>
+# include <string.h>
 
 static void add_to_bucket(hash_node_t **, hash_node_t *);
 /**
@@ -17,9 +17,9 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	hash_node_t *bucket;
 	unsigned long int hash_index;
 
-	if (!key)
+	if (!key || !(*key))
 		return (0);
-	bucket = malloc(sizeof(hash_table_t));
+	bucket = malloc(sizeof(hash_node_t));
 	if (!bucket)
 		return (0);
 	bucket->key = strdup(key);
