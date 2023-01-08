@@ -24,19 +24,34 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		return (0);
 	bucket->key = strdup(key);
 	if (!bucket->key)
+	{
+		free(bucket);
 		return (0);
+	}
 	bucket->value = strdup(value);
 	if (!bucket->value)
+	{
+		free(bucket->key);
+		free(bucket);
 		return (0);
+	}
 	bucket->next = NULL;
 	hash_index = key_index((unsigned char *) key, ht->size);
 	if (!(*(ht->array + hash_index)))
+	{
 		*(ht->array + hash_index) = bucket;
+		ht->count++;
+	}
 	else if (strcmp((*(ht->array + hash_index))->key, key) == 0)
+	{
+		free_bucket(*(ht->array + hash_index));
 		*(ht->array + hash_index) = bucket;
+	}
 	else
+	{
 		add_to_bucket((ht->array + hash_index), bucket);
-	ht->count++;
+		ht->count++;
+	}
 	return (1);
 }
 
