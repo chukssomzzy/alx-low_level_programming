@@ -1,0 +1,4 @@
+ files = main.c school.c
+ 
+school : $(files) m.h
+	gcc $(files) -o school
