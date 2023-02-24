@@ -1,9 +1,9 @@
 CC = gcc 
 SRC = main.c school.c 
-OBJ = main.o school.c 
+OBJ = main.o school.o 
 
 all: $(OBJ) 
 	$(CC) $(OBJ) -o school
 
 main.o: main.c m.h
-school.h: school.c m.h
+school.o: school.c m.h
