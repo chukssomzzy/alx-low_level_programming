@@ -1,4 +1,2 @@
- files = main.c school.c
- 
-school : $(files) m.h
-	gcc $(files) -o school
+ all : main.c school.c m.h
+	gcc main.c school.c -o school
