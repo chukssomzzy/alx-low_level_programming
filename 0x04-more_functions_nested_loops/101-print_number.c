@@ -3,33 +3,24 @@
 /**
  * print_number - prints numbers
  * @n: number to be printed
- * Return: void
  */
 void print_number(int n)
 {
-	int ns[4], tmp, ntmp;
+	char tmp[1000];
 	int i = 0;
-	char fl = 0;
 
-	ntmp = n;
-	while (i < 4)
+	if (n < 0)
 	{
-		ns[i] = fl;
-		i++;
+		_putchar('-');
+		n *= -1;
 	}
-	while (ntmp != 0)
+	if (!n)
+		_putchar('0');
+	while (n)
 	{
-		tmp = n / BASE;
-		ns[i] = ntmp % BASE;
-		ntmp = tmp;
+		tmp[i++] = '0' + n % BASE;
+		n /= BASE;
 	}
-	i = 4;
-	while (i <= 0)
-	{
-		if (ns[i] != fl)
-		{
-			_putchar('0' + ns[i]);
-		}
-		i--;
-	}
+	while (i--)
+		_putchar(tmp[i]);
 }
