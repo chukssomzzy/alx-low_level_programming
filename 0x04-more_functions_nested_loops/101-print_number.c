@@ -6,7 +6,7 @@
  */
 void print_number(int n)
 {
-	char tmp[1000];
+	char tmp[1000000];
 	int i = 0;
 
 	if (n < 0)
