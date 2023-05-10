@@ -1,5 +1,5 @@
 # include <stdio.h>
-
+# include <unistd.h>
 /**
  * _putchar - print a character
  * @ch: a character to print
@@ -8,7 +8,6 @@
 
 int _putchar(char ch)
 {
-	putchar(ch);
-	return (0);
+	return (write(1, &ch, 1));
 }
 
