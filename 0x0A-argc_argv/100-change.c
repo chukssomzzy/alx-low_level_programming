@@ -23,6 +23,11 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	tmp_amt = atoi(*(argv + 1));
+	if (tmp_amt < 0)
+	{
+		printf("0\n");
+		return (1);
+	}
 	while (tmp_amt)
 	{
 		int tmp;
