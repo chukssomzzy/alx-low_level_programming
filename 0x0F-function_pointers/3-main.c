@@ -36,4 +36,3 @@ int main(int argc, char **argv)
 	printf("%i\n", get_op_fun(op)(arg_1, arg_2));
 	exit(EXIT_SUCCESS);
 }
-

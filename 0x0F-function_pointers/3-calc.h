@@ -14,7 +14,6 @@ typedef struct op
 	char *op;
 	int (*f)(int a, int b);
 } op_t;
-int _putchar(char c);
 int op_add(int, int);
 int op_sub(int, int);
 int op_mul(int, int);
