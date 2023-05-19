@@ -42,7 +42,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		*(ht->array + hash_index) = bucket;
 		ht->count++;
 	}
-	else if (strcmp((*(ht->array + hash_index))->key, key) == 0)
+	else if (!(strcmp((*(ht->array + hash_index))->key, key)))
 	{
 		free_bucket(*(ht->array + hash_index));
 		*(ht->array + hash_index) = bucket;
