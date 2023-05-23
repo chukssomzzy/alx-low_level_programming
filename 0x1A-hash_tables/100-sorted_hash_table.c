@@ -5,6 +5,7 @@ static void sort_bucket(shash_node_t *first, shash_node_t *last);
 static shash_node_t *partition(shash_node_t *first, shash_node_t *last);
 static int findnode(shash_node_t *, char *);
 static void replace_node_at(shash_node_t *, int, char *);
+static void sort_add(shash_table_t *, shash_node_t *);
 
 /**
  * shash_table_create - initialize a hash table
@@ -37,7 +38,8 @@ int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 {
 	shash_node_t *bucket;
 	unsigned long int ht_index;
-	shash_node_t *bucket_head;
+	shash_node_t **bucket_head;
+	shash_node_t *tmp;
 	int idx = 0;
 
 	if (!key || !(*key) || !ht || !ht->array)
@@ -62,28 +64,25 @@ int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 	bucket->sprev = NULL;
 	bucket->snext = NULL;
 	ht_index = key_index((unsigned char *) key, ht->size);
-	bucket_head = *(ht->array + ht_index);
+	bucket_head = (ht->array + ht_index);
 	if (!bucket_head)
 	{
-		bucket_head = bucket;
-		if (!ht->shead)
-		{
-			ht->shead = bucket;
-			ht->stail = bucket;
-		} else
-		{
-			ht->stail->snext = bucket;
-			bucket->snext = NULL;
-			bucket->sprev = ht->stail->snext;
-			ht->stail = bucket;
-			sort_bucket(ht->shead, ht->stail);
-		}
+		*bucket_head = bucket;
+		sort_add(ht, bucket);
 		idx = -1;
 	}
-	if (!idx)
+	else if (!idx)
 	{
-		idx = findnode(bucket_head, bucket->key);
-		replace_node_at(bucket_head, idx, bucket->value);
+		idx = findnode(*bucket_head, bucket->key);
+		replace_node_at(*bucket_head, idx, bucket->value);
+		free(bucket->key);
+		free(bucket);
+	} else
+	{
+		tmp = *bucket_head;
+		*bucket_head = bucket;
+		bucket->next = tmp;
+		sort_add(ht, bucket);
 	}
 	return (1);
 }
@@ -187,4 +186,26 @@ void replace_node_at(shash_node_t *bucket, int idx, char *value)
 		;
 	free(bucket->value);
 	bucket->value = value;
+}
+
+/**
+ * sort_add - Create a doubly linked list then sort
+ * @ht:  pointer to the hash table
+ * @bucket: pointer to bucket to add
+ */
+
+void sort_add(shash_table_t *ht, shash_node_t *bucket)
+{
+	if (!ht->shead)
+	{
+		ht->shead = bucket;
+		ht->stail = bucket;
+	} else
+	{
+		ht->stail->snext = bucket;
+		bucket->snext = NULL;
+		bucket->sprev = ht->stail->snext;
+		ht->stail = bucket;
+		sort_bucket(ht->shead, ht->stail);
+	}
 }
