@@ -1,6 +1,6 @@
 # include "hash_tables.h"
 # include <string.h>
-static void swap_bucket(shash_node_t **first, shash_node_t **last);
+static void swap_bucket(shash_node_t *, shash_node_t *);
 static void sort_bucket(shash_node_t *first, shash_node_t *last);
 static shash_node_t *partition(shash_node_t *first, shash_node_t *last);
 static int findnode(shash_node_t *, char *);
@@ -38,7 +38,7 @@ int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 	shash_node_t *bucket;
 	unsigned long int ht_index;
 	shash_node_t *bucket_head;
-	int idx;
+	int idx = 0;
 
 	if (!key || !(*key) || !ht || !ht->array)
 		return (0);
@@ -63,9 +63,29 @@ int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 	bucket->snext = NULL;
 	ht_index = key_index((unsigned char *) key, ht->size);
 	bucket_head = *(ht->array + ht_index);
-	if (bucket_head)
+	if (!bucket_head)
+	{
 		bucket_head = bucket;
-	else if ()
+		if (!ht->shead)
+		{
+			ht->shead = bucket;
+			ht->stail = bucket;
+		} else
+		{
+			ht->stail->snext = bucket;
+			bucket->snext = NULL;
+			bucket->sprev = ht->stail->snext;
+			ht->stail = bucket;
+			sort_bucket(ht->shead, ht->stail);
+		}
+		idx = -1;
+	}
+	if (!idx)
+	{
+		idx = findnode(bucket_head, bucket->key);
+		replace_node_at(bucket_head, idx, bucket->value);
+	}
+	return (1);
 }
 
 /**
@@ -104,12 +124,12 @@ shash_node_t *partition(shash_node_t *first, shash_node_t *last)
 		if (strcmp(j->key, pivot) < 0)
 		{
 			i = (!i) ? first : i->snext;
-			swap_bucket(&i, &j);
+			swap_bucket(i, j);
 		}
 		j = j->snext;
 	}
 	i = (!i) ? first : i->snext;
-	swap_bucket(&i, &last);
+	swap_bucket(i, last);
 	return (i);
 }
 
@@ -118,12 +138,19 @@ shash_node_t *partition(shash_node_t *first, shash_node_t *last)
  * @first: points to the first bucket
  * @last: points to the second bucket
  */
-void swap_bucket(shash_node_t **first, shash_node_t **last)
+void swap_bucket(shash_node_t *first, shash_node_t *last)
 {
-	shash_node_t *tmp = *first;
+	char *temp_key = first->key;
+	char *temp_val = first->value;
+	shash_node_t *temp_next = first->next;
 
-	*first = *last;
-	*last = tmp;
+	first->next = last->next;
+	first->key = last->key;
+	first->value = last->value;
+
+	last->next = temp_next;
+	last->key = temp_key;
+	last->value = temp_val;
 }
 
 /**
@@ -158,5 +185,6 @@ void replace_node_at(shash_node_t *bucket, int idx, char *value)
 {
 	while (idx-- && (bucket = bucket->next))
 		;
+	free(bucket->value);
 	bucket->value = value;
 }
