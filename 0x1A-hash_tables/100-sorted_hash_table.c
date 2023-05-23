@@ -20,7 +20,12 @@ shash_table_t *shash_table_create(unsigned long int size)
 
 	if (!ht)
 		return (NULL);
-	ht->array = NULL;
+	ht->array = malloc(size * sizeof(hash_node_t *));
+	if (!ht->array)
+	{
+		free(ht);
+		return (NULL);
+	}
 	ht->shead = NULL;
 	ht->size = size;
 	ht->stail = NULL;
@@ -65,10 +70,10 @@ int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 	bucket->snext = NULL;
 	ht_index = key_index((unsigned char *) key, ht->size);
 	bucket_head = (ht->array + ht_index);
-	if (!bucket_head)
+	if (!*bucket_head)
 	{
 		*bucket_head = bucket;
-		sort_add(ht, bucket);
+		sort_add(ht, *bucket_head);
 		idx = -1;
 	}
 	else if (!idx)
@@ -204,8 +209,10 @@ void sort_add(shash_table_t *ht, shash_node_t *bucket)
 	{
 		ht->stail->snext = bucket;
 		bucket->snext = NULL;
-		bucket->sprev = ht->stail->snext;
+		bucket->sprev = ht->stail;
 		ht->stail = bucket;
+		ht->shead->sprev = NULL;
+		ht->stail->snext = NULL;
 		sort_bucket(ht->shead, ht->stail);
 	}
 }
