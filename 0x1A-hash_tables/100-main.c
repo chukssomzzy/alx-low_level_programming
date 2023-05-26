@@ -18,6 +18,14 @@ int main(void)
 	printf("%i\n", t);
 	t = shash_table_set(ht, "mentioner", "chuks");
 	printf("%i\n", t);
+	t = shash_table_set(ht, "heliotropes", "collides");
+	printf("%i\n", t);
+	t = shash_table_set(ht, "neurospora", "heliotropes");
+	printf("%i\n", t);
+	t = shash_table_set(ht, "depravement", "serafins");
+	printf("%i\n", t);
+	t = shash_table_set(ht, "serafins", "depravement");
+	printf("%i\n", t);
 	printf("%p\n", (void *)ht);
 	exit(0);
 }

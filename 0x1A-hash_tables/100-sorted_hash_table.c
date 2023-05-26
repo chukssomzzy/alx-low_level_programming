@@ -16,20 +16,24 @@ static void sort_add(shash_table_t *, shash_node_t *);
 shash_table_t *shash_table_create(unsigned long int size)
 {
 	shash_table_t *ht;
+	unsigned long int i = 0;
 
 	ht = malloc(sizeof(shash_table_t));
 
 	if (!ht)
 		return (NULL);
 	ht->array = malloc(size * sizeof(hash_node_t *));
+	ht->shead = NULL;
+	ht->size = size;
+	ht->stail = NULL;
 	if (!ht->array)
 	{
 		free(ht);
 		return (NULL);
 	}
-	ht->shead = NULL;
-	ht->size = size;
-	ht->stail = NULL;
+	while (i < size)
+		*(ht->array + i++) = NULL;
+
 	return (ht);
 }
 
@@ -51,7 +55,7 @@ int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 
 	if (!key || !(*key) || !ht || !ht->array)
 		return (0);
-	bucket = malloc(sizeof(shash_node_t *));
+	bucket = malloc(sizeof(shash_node_t));
 	if (!bucket)
 		return (0);
 	bucket->value = strdup(value);
@@ -215,8 +219,6 @@ void sort_add(shash_table_t *ht, shash_node_t *bucket)
 		bucket->snext = NULL;
 		bucket->sprev = ht->stail;
 		ht->stail = bucket;
-		ht->shead->sprev = NULL;
-		ht->stail->snext = NULL;
 		sort_bucket(ht->shead, ht->stail);
 	}
 }
