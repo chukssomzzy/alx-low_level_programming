@@ -33,6 +33,7 @@ int main(void)
 	printf("%s\n", shash_table_get(ht, "neurospora"));
 	printf("%s\n", shash_table_get(ht, "depravement"));
 	printf("%s\n", shash_table_get(ht, "serafins"));
-	printf("%p\n", (void *)ht);
+	shash_table_print(ht);
+	shash_table_rev(ht);
 	exit(0);
 }

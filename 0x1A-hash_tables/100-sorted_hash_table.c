@@ -245,3 +245,36 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	}
 	return (NULL);
 }
+
+/**
+ * shash_table_print - prints sorted linked list
+ * @ht: pointed hash table
+ */
+
+void shash_table_print(const shash_table_t *ht)
+{
+	shash_node_t *sbucket = ht->shead;
+
+	while (sbucket)
+	{
+		printf("%s\n", sbucket->value);
+		sbucket = sbucket->snext;
+	}
+}
+
+
+/**
+ * shash_table_rev - prints table in reverse
+ * @ht: pointer to doubly linked list
+ */
+
+void shash_table_rev(const shash_table_t *ht)
+{
+	shash_node_t *sbucket = ht->stail;
+
+	while (sbucket)
+	{
+		printf("%s\n", sbucket->value);
+		sbucket = sbucket->sprev;
+	}
+}
