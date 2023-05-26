@@ -1,9 +1,10 @@
 # include "hash_tables.h"
 # include <string.h>
+# include <stdio.h>
 static void swap_bucket(shash_node_t *, shash_node_t *);
 static void sort_bucket(shash_node_t *first, shash_node_t *last);
 static shash_node_t *partition(shash_node_t *first, shash_node_t *last);
-static int findnode(shash_node_t *, char *);
+static int findnode(shash_node_t *, char *, int *);
 static void replace_node_at(shash_node_t *, int, char *);
 static void sort_add(shash_table_t *, shash_node_t *);
 
@@ -39,6 +40,7 @@ shash_table_t *shash_table_create(unsigned long int size)
  * @value: pointer to value
  * Return: bucket
  */
+
 int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 {
 	shash_node_t *bucket;
@@ -52,16 +54,16 @@ int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 	bucket = malloc(sizeof(shash_node_t *));
 	if (!bucket)
 		return (0);
-	bucket->key = strdup(key);
-	if (!bucket->key)
+	bucket->value = strdup(value);
+	if (!bucket->value)
 	{
 		free(bucket);
 		return (0);
 	}
-	bucket->value = strdup(value);
-	if (!bucket->value)
+	bucket->key = strdup(key);
+	if (!bucket->key)
 	{
-		free(bucket->key);
+		free(bucket->value);
 		free(bucket);
 		return (0);
 	}
@@ -74,11 +76,9 @@ int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 	{
 		*bucket_head = bucket;
 		sort_add(ht, *bucket_head);
-		idx = -1;
 	}
-	else if (!idx)
+	else if (findnode(*bucket_head, bucket->key, &idx) && idx >= 0)
 	{
-		idx = findnode(*bucket_head, bucket->key);
 		replace_node_at(*bucket_head, idx, bucket->value);
 		free(bucket->key);
 		free(bucket);
@@ -161,21 +161,25 @@ void swap_bucket(shash_node_t *first, shash_node_t *last)
  * findnode - an index where a given nodes is else -1
  * @bucket: pointer to bucket to search
  * @key: pointer to key to search for in nodes
+ * @idx; index
  * Return: index of the found node or -1
  */
 
-int findnode(shash_node_t *bucket, char *key)
+int findnode(shash_node_t *bucket, char *key, int *idx)
 {
 	int i = 0;
 
 	while (bucket)
 	{
 		if (!strcmp(bucket->key, key))
-			return (i);
+		{
+			*idx = i;
+			return (1);
+		}
 		i++;
 		bucket = bucket->next;
 	}
-	return (-1);
+	return (0);
 }
 
 /**
