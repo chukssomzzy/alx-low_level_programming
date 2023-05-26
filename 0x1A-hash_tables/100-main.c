@@ -26,6 +26,13 @@ int main(void)
 	printf("%i\n", t);
 	t = shash_table_set(ht, "serafins", "depravement");
 	printf("%i\n", t);
+	printf("%s\n", shash_table_get(ht, "betty"));
+	printf("%s\n", shash_table_get(ht, "hetairas"));
+	printf("%s\n", shash_table_get(ht, "mentioner"));
+	printf("%s\n", shash_table_get(ht, "heliotropes"));
+	printf("%s\n", shash_table_get(ht, "neurospora"));
+	printf("%s\n", shash_table_get(ht, "depravement"));
+	printf("%s\n", shash_table_get(ht, "serafins"));
 	printf("%p\n", (void *)ht);
 	exit(0);
 }

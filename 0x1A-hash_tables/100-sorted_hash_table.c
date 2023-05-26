@@ -222,3 +222,26 @@ void sort_add(shash_table_t *ht, shash_node_t *bucket)
 		sort_bucket(ht->shead, ht->stail);
 	}
 }
+
+/**
+ * shash_table_get - gets the value of a key from a hashed table
+ * @ht: pointer to hash table to get key from
+ * @key: pointer character array to hash for index of bucket
+ *
+ * Return: the value of the key
+ */
+char *shash_table_get(const shash_table_t *ht, const char *key)
+{
+	unsigned long int idx;
+	shash_node_t *bucket_head;
+
+	idx = key_index((unsigned char *)key, ht->size);
+	bucket_head = *(ht->array + idx);
+	while (bucket_head)
+	{
+		if (!strcmp(bucket_head->key, key))
+			return (bucket_head->value);
+		bucket_head = bucket_head->next;
+	}
+	return (NULL);
+}

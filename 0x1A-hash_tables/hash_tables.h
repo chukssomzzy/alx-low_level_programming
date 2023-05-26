@@ -81,5 +81,6 @@ void hash_table_delete(hash_table_t *ht);
 void free_bucket(hash_node_t *);
 int shash_table_set(shash_table_t *ht, const char *key,  const char *value);
 shash_table_t *shash_table_create(unsigned long int size);
+char *shash_table_get(const shash_table_t *ht, const char *key);
 
 # endif
