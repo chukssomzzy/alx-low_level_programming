@@ -278,3 +278,27 @@ void shash_table_rev(const shash_table_t *ht)
 		sbucket = sbucket->sprev;
 	}
 }
+
+/**
+ * shash_table_delete - deletes a hash table
+ * @ht: pointer to ht
+ */
+
+void shash_table_delete(shash_table_t __attribute__((unused))*ht)
+{
+	shash_node_t *stmp;
+	shash_node_t *sbucket;
+
+	sbucket = ht->shead;
+	stmp = sbucket;
+	while (stmp)
+	{
+		stmp = sbucket->snext;
+		free(sbucket->key);
+		free(sbucket->value);
+		free(sbucket);
+		sbucket = stmp;
+	}
+	free(ht->array);
+	free(ht);
+}

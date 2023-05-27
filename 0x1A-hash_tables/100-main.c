@@ -35,5 +35,6 @@ int main(void)
 	printf("%s\n", shash_table_get(ht, "serafins"));
 	shash_table_print(ht);
 	shash_table_rev(ht);
+	shash_table_delete(ht);
 	exit(0);
 }
