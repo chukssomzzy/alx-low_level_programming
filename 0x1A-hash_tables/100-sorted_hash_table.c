@@ -129,7 +129,7 @@ shash_node_t *partition(shash_node_t *first, shash_node_t *last)
 
 	while (j != last)
 	{
-		if (strcmp(j->key, pivot) < 0)
+		if (strcmp(j->key, pivot) >= 0)
 		{
 			i = (!i) ? first : i->snext;
 			swap_bucket(i, j);
@@ -165,7 +165,7 @@ void swap_bucket(shash_node_t *first, shash_node_t *last)
  * findnode - an index where a given nodes is else -1
  * @bucket: pointer to bucket to search
  * @key: pointer to key to search for in nodes
- * @idx; index
+ * @idx: index
  * Return: index of the found node or -1
  */
 
@@ -275,7 +275,7 @@ void shash_table_print(const shash_table_t *ht)
 
 
 /**
- * shash_table_rev - prints table in reverse
+ * shash_table_print_rev - prints table in reverse
  * @ht: pointer to doubly linked list
  */
 
