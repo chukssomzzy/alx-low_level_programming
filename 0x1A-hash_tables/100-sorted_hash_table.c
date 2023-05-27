@@ -253,13 +253,24 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 
 void shash_table_print(const shash_table_t *ht)
 {
-	shash_node_t *sbucket = ht->shead;
+	shash_node_t *sbucket;
 
+	if (!ht || !ht->array)
+		return;
+	sbucket = ht->shead;
+	putchar('{');
 	while (sbucket)
 	{
-		printf("%s\n", sbucket->value);
+		printf("'%s': '%s'", sbucket->key, sbucket->value);
 		sbucket = sbucket->snext;
+		if (sbucket)
+		{
+			putchar(',');
+			putchar(' ');
+		}
 	}
+	putchar('}');
+	putchar('\n');
 }
 
 
@@ -268,15 +279,23 @@ void shash_table_print(const shash_table_t *ht)
  * @ht: pointer to doubly linked list
  */
 
-void shash_table_rev(const shash_table_t *ht)
+void shash_table_print_rev(const shash_table_t *ht)
 {
-	shash_node_t *sbucket = ht->stail;
+	shash_node_t *sbucket;
 
+	if (!ht || !ht->array)
+		return;
+	sbucket = ht->stail;
+	putchar('{');
 	while (sbucket)
 	{
-		printf("%s\n", sbucket->value);
+		printf("'%s': '%s'", sbucket->key, sbucket->value);
 		sbucket = sbucket->sprev;
+		if (sbucket)
+			printf(", ");
 	}
+	putchar('}');
+	putchar('\n');
 }
 
 /**
