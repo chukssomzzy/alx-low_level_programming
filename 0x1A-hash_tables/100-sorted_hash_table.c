@@ -104,13 +104,13 @@ int shash_table_set(shash_table_t *ht, const char *key,  const char *value)
 
 void sort_bucket(shash_node_t *first, shash_node_t *last)
 {
-	if (!last && last->sprev != first && last->next != first)
+	if (last && last != first && first != last->snext)
 	{
 		shash_node_t *pivot;
 
 		pivot = partition(first, last);
-		sort_bucket(first, pivot);
-		sort_bucket(pivot, last);
+		sort_bucket(first, pivot->sprev);
+		sort_bucket(pivot->snext, last);
 	}
 }
 
@@ -129,7 +129,7 @@ shash_node_t *partition(shash_node_t *first, shash_node_t *last)
 
 	while (j != last)
 	{
-		if (strcmp(j->key, pivot) >= 0)
+		if (strcmp(j->key, pivot) < 0)
 		{
 			i = (!i) ? first : i->snext;
 			swap_bucket(i, j);
@@ -148,17 +148,20 @@ shash_node_t *partition(shash_node_t *first, shash_node_t *last)
  */
 void swap_bucket(shash_node_t *first, shash_node_t *last)
 {
-	char *temp_key = first->key;
-	char *temp_val = first->value;
-	shash_node_t *temp_next = first->next;
+	if (first && last && first != last)
+	{
+		char *temp_key = first->key;
+		char *temp_val = first->value;
+		shash_node_t *temp_next = first->next;
 
-	first->next = last->next;
-	first->key = last->key;
-	first->value = last->value;
+		first->next = last->next;
+		first->key = last->key;
+		first->value = last->value;
 
-	last->next = temp_next;
-	last->key = temp_key;
-	last->value = temp_val;
+		last->next = temp_next;
+		last->key = temp_key;
+		last->value = temp_val;
+	}
 }
 
 /**
