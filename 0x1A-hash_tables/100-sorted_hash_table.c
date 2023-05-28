@@ -18,6 +18,9 @@ shash_table_t *shash_table_create(unsigned long int size)
 	shash_table_t *ht;
 	unsigned long int i = 0;
 
+	if (!size)
+		return (NULL);
+
 	ht = malloc(sizeof(shash_table_t));
 
 	if (!ht)
@@ -235,6 +238,8 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	unsigned long int idx;
 	shash_node_t *bucket_head;
 
+	if (!ht || !key || !ht->array)
+		return (NULL);
 	idx = key_index((unsigned char *)key, ht->size);
 	bucket_head = *(ht->array + idx);
 	while (bucket_head)
@@ -308,6 +313,8 @@ void shash_table_delete(shash_table_t __attribute__((unused))*ht)
 	shash_node_t *stmp;
 	shash_node_t *sbucket;
 
+	if (!ht)
+		return;
 	sbucket = ht->shead;
 	stmp = sbucket;
 	while (stmp)
