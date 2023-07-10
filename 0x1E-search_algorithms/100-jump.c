@@ -1,6 +1,6 @@
 # include "search_algos.h"
 # include <math.h>
-#include <stdio.h>
+# include <stdio.h>
 
 /**
  * jump_search - searches for a value in a sorted array of integers
@@ -16,33 +16,27 @@ int jump_search(int *array, size_t size, int value)
 	size_t jmp_sz = sqrt(size);
 	size_t par_rht = jmp_sz;
 
+	printf("Value checked array[%lu] = [%i]\n", par_lft, array[par_lft]);
 	while (par_rht < size)
+	{
 		if (array[par_rht] < value)
 		{
-			printf("Value checked array[%lu] = [%i]\n", par_lft, array[par_lft]);
 			printf("Value checked array[%lu] = [%i]\n", par_rht, array[par_rht]);
 			par_lft = par_rht;
 			par_rht = par_lft + jmp_sz;
-		} else if (array[par_rht] == value)
-		{
-			printf("Value checked array[%lu] = [%i]\n", par_rht, array[par_rht]);
-			return (par_rht);
-		} else if (array[par_lft] == value)
-		{
-			printf("Value checked array[%lu] = [%i]\n", par_rht, array[par_rht]);
-			return (par_lft);
+			continue;
 		}
+		break;
+	}
 	if (par_rht < size)
 		printf("Value found between indexes [%lu] and [%lu]\n", par_lft, par_rht);
 	else
 		printf("Value found between indexes [%lu] and [%lu]\n", par_lft, size);
 	while (par_lft < size)
 	{
+		printf("Value checked array[%lu] = [%i]\n", par_lft, array[par_lft]);
 		if (array[par_lft] == value)
-		{
-			printf("Value checked array[%lu] = [%i]\n", par_rht, array[par_rht]);
 			return (par_lft);
-		}
 		par_lft++;
 	}
 	return (-1);

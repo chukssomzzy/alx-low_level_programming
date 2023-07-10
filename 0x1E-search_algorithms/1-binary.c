@@ -1,4 +1,5 @@
 # include "search_algos.h"
+# include <stdio.h>
 
 static void print_array(int *, size_t, size_t);
 /**
