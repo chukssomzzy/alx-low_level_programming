@@ -14,39 +14,44 @@
 
 listint_t *jump_list(listint_t *list, size_t size, int value)
 {
-	size_t lw_bound;
-	size_t jmp_sz;
-	size_t up_bound;
+	size_t lw_bound = 0;
+	size_t jmp_sz = sqrt(size);
+	size_t up_bound = jmp_sz;
 	listint_t *lw_bptr;
 	listint_t *up_bptr;
 
 	if (!list)
 		return (NULL);
-	jmp_sz = sqrt(size);
-	lw_bound = 0;
-	up_bound = jmp_sz;
-	up_bptr = list;
 	lw_bptr = list;
+	up_bptr = list;
 
-	while (up_bptr->index != ((up_bound < size) ? up_bound : size) - 1)
+	while (up_bptr->index <= ((up_bound < size) ? up_bound : size))
 	{
-		up_bptr = up_bptr->next;
 		if (up_bptr->index == up_bound && up_bptr->n < value)
 		{
+			printf("Value checked at index [%lu] = [%i]\n", up_bptr->index, up_bptr->n);
 			lw_bptr = up_bptr;
 			lw_bound = up_bound;
 			up_bound += jmp_sz;
 		} else if (lw_bound >= size)
 			return (NULL);
+		up_bptr = up_bptr->next;
+		if (!up_bptr)
+			break;
 	}
-
-	while (lw_bptr->n < value)
+	printf("Value found between indexes [%lu] = [%lu]\n", lw_bound, up_bound);
+	while (lw_bptr->n < value && lw_bptr->index < (size - 1))
 	{
+		printf("Value checked at index [%lu] = [%i]\n", lw_bptr->index, lw_bptr->n);
 		lw_bptr = lw_bptr->next;
-		if (lw_bptr->index == (up_bound < size) ? up_bound : size)
+		if (lw_bptr->index == ((up_bound < size) ? up_bound : size))
 			return (NULL);
 	}
 	if (lw_bptr->n == value)
+	{
+		printf("Value checked at index [%lu] = [%i]\n", lw_bptr->index, lw_bptr->n);
 		return (lw_bptr);
+	}
+	printf("Value checked at index [%lu] = [%i]\n", lw_bptr->index, lw_bptr->n);
 	return (NULL);
 }
