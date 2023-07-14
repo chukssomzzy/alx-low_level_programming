@@ -22,7 +22,7 @@ int binary_search(int *array, size_t size, int value)
 		return (-1);
 	lftm = 0;
 	rhtm = size - 1;
-	while (lftm < rhtm)
+	while (lftm <= rhtm)
 	{
 		mid = (lftm + rhtm) / 2;
 		print_array(array, lftm, rhtm);
